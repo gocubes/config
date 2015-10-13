@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"os"
 )
 
 // parse json string
@@ -19,4 +20,23 @@ func (j *JSON) SetRawBytes(raw []byte) {
 
 func (j *JSON) Get(data interface{}) error {
 	return json.Unmarshal(j.raw, data)
+}
+
+func (j *JSON) Set(data interface{}) (int, error) {
+	// open file
+	fp, fperr := os.OpenFile(filepath, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, os.ModePerm)
+	defer fp.Close()
+	if fperr != nil {
+		return 0, fperr
+	}
+
+	// encode
+	bytes, err := json.MarshalIndent(&data, "", "    ")
+	if err != nil {
+		return 0, err
+	}
+	bytes = append(bytes, '\n')
+
+	// write
+	return fp.Write(bytes)
 }
