@@ -54,6 +54,18 @@ func New(file, format string) (provider Provider, err error) {
 	return
 }
 
+// init default provider
+func defaultProvider() {
+	var derr error
+	Prefix = "./"
+	provider, derr = New("main.json", "json")
+	if derr != nil {
+		fmt.Printf("[config package]get default config error,details: %v\n", derr)
+		os.Exit(1)
+	}
+}
+
 func Get(data interface{}) error {
+	defaultProvider()
 	return provider.Get(data)
 }
