@@ -69,3 +69,8 @@ func Get(data interface{}) error {
 	defaultProvider()
 	return provider.Get(data)
 }
+
+func Set(data interface{}) (int, error) {
+	defaultProvider()
+	return provider.Set(data)
+}
