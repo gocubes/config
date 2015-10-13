@@ -9,6 +9,7 @@ type Provider interface {
 	SetRawString(raw string)
 	SetRawBytes(raw []byte)
 	Get(data interface{}) error
+	Set(data interface{}) (int, error)
 }
 
 var (
