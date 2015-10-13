@@ -34,6 +34,10 @@ func New(file, format string) (provider Provider, err error) {
 		provider = &JSON{}
 		provider.SetRawBytes(raw)
 
+	case "xml":
+		provider = &XML{}
+		provider.SetRawBytes(raw)
+
 	default:
 		return nil, errors.New("Not support this format config file.")
 	}
