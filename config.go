@@ -30,6 +30,9 @@ func New(file, format string) (provider Provider, err error) {
 	fp.Read(raw)
 
 	switch format {
+	case "json":
+		provider = &JSON{}
+		provider.SetRawBytes(raw)
 
 	default:
 		return nil, errors.New("Not support this format config file.")
