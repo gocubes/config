@@ -63,3 +63,7 @@ func New(file, format string) (provider Provider, err error) {
 	}
 	return
 }
+
+func Get(data interface{}) error {
+	return provider.Get(data)
+}
