@@ -19,16 +19,6 @@ var (
 	provider Provider
 )
 
-func init() {
-	var derr error
-	Prefix = "./"
-	provider, derr = New("main.json", "json")
-	if derr != nil {
-		fmt.Printf("[config package]get default config error,details: %v\n", derr)
-		os.Exit(1)
-	}
-}
-
 func New(file, format string) (provider Provider, err error) {
 
 	// set config file full path
