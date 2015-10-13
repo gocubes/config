@@ -12,14 +12,21 @@ type Provider interface {
 }
 
 var (
-	Prefix string
+	Prefix   string
+	filepath string
 )
 
 func New(file, format string) (provider Provider, err error) {
 
 	// set config file full path
-	filepath := Prefix + file
+	filepath = Prefix + file
 	fp, fperr := os.Open(filepath)
+	if os.IsNotExist(fperr) {
+		fperr = nil
+		filepath = Prefix + "/etc/" + file
+		fp, fperr = os.Open(filepath)
+	}
+
 	if fperr != nil {
 		return nil, fperr
 	}
