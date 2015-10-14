@@ -101,4 +101,7 @@ func TestXmlGet(t *testing.T) {
 func TestCleanCase(t *testing.T) {
 	t.Logf("Remove json file: %s\n", jsonFileName)
 	os.Remove(jsonFileName)
+
+	t.Logf("Remove xml file: %s\n", xmlFileName)
+	os.Remove(xmlFileName)
 }
