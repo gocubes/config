@@ -23,6 +23,7 @@ func (j *JSON) Get(data interface{}) error {
 }
 
 func (j *JSON) Set(data interface{}) (int, error) {
+	var err error
 	// open file
 	fp, fperr := os.OpenFile(filepath, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, os.ModePerm)
 	defer fp.Close()
@@ -31,12 +32,11 @@ func (j *JSON) Set(data interface{}) (int, error) {
 	}
 
 	// encode
-	bytes, err := json.MarshalIndent(&data, "", "    ")
-	if err != nil {
+	if j.raw, err = json.MarshalIndent(&data, "", "    "); err != nil {
 		return 0, err
 	}
-	bytes = append(bytes, '\n')
+	j.raw = append(j.raw, '\n')
 
 	// write
-	return fp.Write(bytes)
+	return fp.Write(j.raw)
 }
