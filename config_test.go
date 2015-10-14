@@ -7,7 +7,9 @@ import (
 )
 
 var (
-	jsonFileName string = time.Now().Format("200601020304.json")
+	name         = "default"
+	now          = time.Now()
+	jsonFileName = now.Format("200601020304.json")
 )
 
 type TestData struct {
@@ -17,8 +19,8 @@ type TestData struct {
 
 func TestJsonSet(t *testing.T) {
 	testData := &TestData{
-		Date: time.Now(),
-		Name: "default",
+		Date: now,
+		Name: name,
 	}
 
 	// new provider
@@ -27,6 +29,7 @@ func TestJsonSet(t *testing.T) {
 		t.Fatalf("[JSON New]%v", err.Error())
 	}
 
+	// set data
 	n, err := jsonProvider.Set(*testData)
 	if err != nil {
 		t.Fatalf("[JSON Set]write %v bytes, error: %v\n", n, err)
