@@ -23,7 +23,7 @@ func New(file, format string) (provider Provider, err error) {
 
 	// set config file full path
 	filepath = Prefix + file
-	fp, fperr := os.Open(filepath)
+	fp, fperr := os.OpenFile(filepath, os.O_RDONLY|os.O_CREATE, os.ModePerm)
 	if os.IsNotExist(fperr) {
 		fperr = nil
 		filepath = Prefix + "/etc/" + file
