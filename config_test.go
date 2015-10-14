@@ -10,6 +10,7 @@ var (
 	name         = "default"
 	now          = time.Now()
 	jsonFileName = now.Format("200601020304.json")
+	xmlFileName  = now.Format("200601020304.xml")
 )
 
 type TestData struct {
@@ -54,6 +55,25 @@ func TestJsonGet(t *testing.T) {
 	// check data
 	if testData.Date != now || testData.Name != name {
 		t.Fatalf("[Check]set Date: %v, Name: %v;but get Date: %v, Name: %v\n", now, name, testData.Date, testData.Name)
+	}
+}
+
+func TestXmlSet(t *testing.T) {
+	testData := &TestData{
+		Date: now,
+		Name: name,
+	}
+
+	// new provider
+	xmlProvider, err := New(xmlFileName, "xml")
+	if err != nil {
+		t.Fatalf("[xml New]%v", err.Error())
+	}
+
+	// set data
+	n, err := xmlProvider.Set(*testData)
+	if err != nil {
+		t.Fatalf("[xml Set]write %v bytes, error: %v\n", n, err)
 	}
 }
 
