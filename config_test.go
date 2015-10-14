@@ -35,3 +35,8 @@ func TestJsonSet(t *testing.T) {
 		t.Fatalf("[JSON]write %v bytes, error: %v\n", n, err)
 	}
 }
+
+func TestCleanCase(t *testing.T) {
+	t.Logf("Remove json file: %s\n", jsonFileName)
+	os.Remove(jsonFileName)
+}
