@@ -77,6 +77,27 @@ func TestXmlSet(t *testing.T) {
 	}
 }
 
+func TestXmlGet(t *testing.T) {
+	testData := &TestData{}
+
+	// new provider
+	xmlProvider, err := New(xmlFileName, "xml")
+	if err != nil {
+		t.Fatalf("[xml New]%v", err.Error())
+	}
+
+	// get data
+	err = xmlProvider.Get(testData)
+	if err != nil {
+		t.Fatalf("[xml Get] %v\n", err.Error())
+	}
+
+	// check data
+	if testData.Date != now || testData.Name != name {
+		t.Fatalf("[Check]set Date: %v, Name: %v;but get Date: %v, Name: %v\n", now, name, testData.Date, testData.Name)
+	}
+}
+
 func TestCleanCase(t *testing.T) {
 	t.Logf("Remove json file: %s\n", jsonFileName)
 	os.Remove(jsonFileName)
