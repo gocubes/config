@@ -93,7 +93,7 @@ func TestXmlGet(t *testing.T) {
 	}
 
 	// check data
-	if testData.Date != now || testData.Name != name {
+	if !testData.Date.Equal(now) || testData.Name != name {
 		t.Fatalf("[Check]set Date: %v, Name: %v;but get Date: %v, Name: %v\n", now, name, testData.Date, testData.Name)
 	}
 }
