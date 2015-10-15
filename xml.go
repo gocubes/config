@@ -38,10 +38,10 @@ func (x *XML) Set(data interface{}) (int, error) {
 	bytes = append(bytes, '\n')
 
 	// add xml header
-	data4write := make([]byte, len(xml.Header)+len(bytes))
-	copy(data4write, []byte(xml.Header))
-	copy(data4write[len(xml.Header):], bytes)
+	x.raw = make([]byte, len(xml.Header)+len(bytes))
+	copy(x.raw, []byte(xml.Header))
+	copy(x.raw[len(xml.Header):], bytes)
 
 	// write
-	return fp.Write(data4write)
+	return fp.Write(x.raw)
 }
