@@ -53,7 +53,8 @@ func TestJsonGet(t *testing.T) {
 	}
 
 	// check data
-	if testData.Date != now || testData.Name != name {
+	t.Logf("[Time]now: %vs %vns, data: %vs %vns.", now.Second(), now.Nanosecond(), testData.Date.Second(), testData.Date.Nanosecond())
+	if !testData.Date.Equal(now) || testData.Name != name {
 		t.Fatalf("[Check]set Date: %v, Name: %v;but get Date: %v, Name: %v\n", now, name, testData.Date, testData.Name)
 	}
 }
