@@ -1,0 +1,12 @@
+{
+    "name": "Frank Kung",
+    "site": "http://blog.kongfanjian.com",
+    "github": "https://github.com/kofj",
+    "works": [{
+        "name": "gocubes/config",
+        "url": "https://github.com/gocubes/config"
+    }, {
+        "name": "bmi",
+        "url": "https://github.com/kofj/bmi"
+    }]
+}
