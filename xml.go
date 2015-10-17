@@ -18,6 +18,10 @@ func (x *XML) SetRawBytes(raw []byte) {
 	x.raw = raw
 }
 
+func (x *XML) GetRawBytes() []byte {
+	return x.raw
+}
+
 func (x *XML) Get(data interface{}) error {
 	return xml.Unmarshal(x.raw, data)
 }
