@@ -11,6 +11,7 @@ type Provider interface {
 	SetRawBytes(raw []byte)
 	Get(data interface{}) error
 	Set(data interface{}) (int, error)
+	GetRawBytes() []byte
 }
 
 var (
