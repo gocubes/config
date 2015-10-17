@@ -18,6 +18,10 @@ func (j *JSON) SetRawBytes(raw []byte) {
 	j.raw = raw
 }
 
+func (j *JSON) GetRawBytes() []byte {
+	return j.raw
+}
+
 func (j *JSON) Get(data interface{}) error {
 	return json.Unmarshal(j.raw, data)
 }
