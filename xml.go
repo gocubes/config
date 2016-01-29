@@ -54,3 +54,7 @@ func (x *XML) Set(data interface{}) (int, error) {
 func (x *XML) SetPath(path string) {
 	x.path = path
 }
+
+func (x *XML) GetPath() string {
+	return x.path
+}

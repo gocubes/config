@@ -49,3 +49,7 @@ func (j *JSON) Set(data interface{}) (int, error) {
 func (j *JSON) SetPath(path string) {
 	j.path = path
 }
+
+func (j *JSON) GetPath() string {
+	return j.path
+}
