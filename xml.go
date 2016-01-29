@@ -7,7 +7,8 @@ import (
 
 // parse xml string
 type XML struct {
-	raw []byte
+	path string
+	raw  []byte
 }
 
 func (x *XML) SetRawString(raw string) {
@@ -48,4 +49,8 @@ func (x *XML) Set(data interface{}) (int, error) {
 
 	// write
 	return fp.Write(x.raw)
+}
+
+func (x *XML) SetPath(path string) {
+	x.path = path
 }

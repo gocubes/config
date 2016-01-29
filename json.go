@@ -7,7 +7,8 @@ import (
 
 // parse json string
 type JSON struct {
-	raw []byte
+	path string
+	raw  []byte
 }
 
 func (j *JSON) SetRawString(raw string) {
@@ -43,4 +44,8 @@ func (j *JSON) Set(data interface{}) (int, error) {
 
 	// write
 	return fp.Write(j.raw)
+}
+
+func (j *JSON) SetPath(path string) {
+	j.path = path
 }

@@ -12,6 +12,7 @@ type Provider interface {
 	Get(data interface{}) error
 	Set(data interface{}) (int, error)
 	GetRawBytes() []byte
+	SetPath(path string)
 }
 
 var (
