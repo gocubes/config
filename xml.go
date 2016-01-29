@@ -58,3 +58,19 @@ func (x *XML) SetPath(path string) {
 func (x *XML) GetPath() string {
 	return x.path
 }
+
+func (x *XML) Reload() error {
+	fp, fperr := os.OpenFile(x.GetPath(), os.O_RDONLY|os.O_CREATE, os.ModePerm)
+
+	if fperr != nil {
+		return fperr
+	}
+
+	// read config file raw data.
+	fstat, _ := fp.Stat()
+	raw := make([]byte, fstat.Size())
+	fp.Read(raw)
+
+	x.SetRawBytes(raw)
+	return nil
+}

@@ -53,3 +53,19 @@ func (j *JSON) SetPath(path string) {
 func (j *JSON) GetPath() string {
 	return j.path
 }
+
+func (j *JSON) Reload() error {
+	fp, fperr := os.OpenFile(j.GetPath(), os.O_RDONLY|os.O_CREATE, os.ModePerm)
+
+	if fperr != nil {
+		return fperr
+	}
+
+	// read config file raw data.
+	fstat, _ := fp.Stat()
+	raw := make([]byte, fstat.Size())
+	fp.Read(raw)
+
+	j.SetRawBytes(raw)
+	return nil
+}

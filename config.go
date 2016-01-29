@@ -14,6 +14,7 @@ type Provider interface {
 	GetRawBytes() []byte
 	SetPath(path string)
 	GetPath() string
+	Reload() error
 }
 
 var (
