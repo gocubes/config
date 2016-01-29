@@ -56,6 +56,7 @@ func New(file, format string) (provider Provider, err error) {
 	default:
 		return nil, errors.New("Not support this format config file.")
 	}
+	provider.SetPath(filepath)
 	return
 }
 
