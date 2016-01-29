@@ -15,6 +15,7 @@ type Provider interface {
 	SetPath(path string)
 	GetPath() string
 	Reload(data interface{}) error
+	ReloadOn(data interface{}, signals ...os.Signal)
 }
 
 var (

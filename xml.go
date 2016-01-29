@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/xml"
 	"os"
+	"os/signal"
 )
 
 // parse xml string
@@ -73,4 +74,14 @@ func (x *XML) Reload(data interface{}) error {
 
 	x.SetRawBytes(raw)
 	return x.Get(data)
+}
+
+func (x *XML) ReloadOn(data interface{}, signals ...os.Signal) {
+	go func() {
+		ch := make(chan os.Signal, 1)
+		signal.Notify(ch, signals...)
+		for _ = range ch {
+			x.Reload(data)
+		}
+	}()
 }

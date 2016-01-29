@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"os"
+	"os/signal"
 )
 
 // parse json string
@@ -68,4 +69,14 @@ func (j *JSON) Reload(data interface{}) error {
 
 	j.SetRawBytes(raw)
 	return j.Get(data)
+}
+
+func (j *JSON) ReloadOn(data interface{}, signals ...os.Signal) {
+	go func() {
+		ch := make(chan os.Signal, 1)
+		signal.Notify(ch, signals...)
+		for _ = range ch {
+			j.Reload(data)
+		}
+	}()
 }
