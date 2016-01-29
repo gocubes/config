@@ -54,7 +54,7 @@ func (j *JSON) GetPath() string {
 	return j.path
 }
 
-func (j *JSON) Reload() error {
+func (j *JSON) Reload(data interface{}) error {
 	fp, fperr := os.OpenFile(j.GetPath(), os.O_RDONLY|os.O_CREATE, os.ModePerm)
 
 	if fperr != nil {
@@ -67,5 +67,5 @@ func (j *JSON) Reload() error {
 	fp.Read(raw)
 
 	j.SetRawBytes(raw)
-	return nil
+	return j.Get(data)
 }

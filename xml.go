@@ -59,7 +59,7 @@ func (x *XML) GetPath() string {
 	return x.path
 }
 
-func (x *XML) Reload() error {
+func (x *XML) Reload(data interface{}) error {
 	fp, fperr := os.OpenFile(x.GetPath(), os.O_RDONLY|os.O_CREATE, os.ModePerm)
 
 	if fperr != nil {
@@ -72,5 +72,5 @@ func (x *XML) Reload() error {
 	fp.Read(raw)
 
 	x.SetRawBytes(raw)
-	return nil
+	return x.Get(data)
 }
